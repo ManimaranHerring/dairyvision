@@ -75,7 +75,7 @@ class Command(BaseCommand):
             c = Cattle.objects.create(
                 farmer=f, tag_number=tag, breed=breed,
                 age_years=age, is_milking=milking,
-                expected_daily_yield=Decimal(str(yield_)))
+                expected_daily_yield_litres=Decimal(str(yield_)))
             cattle_map.setdefault(f.id, []).append(c)
 
         # ── Farms ─────────────────────────────────────────────────
@@ -106,7 +106,7 @@ class Command(BaseCommand):
                 if not milking:
                     continue
                 for session in ['morning', 'evening']:
-                    qty = sum(float(c.expected_daily_yield) for c in milking)
+                    qty = sum(float(c.expected_daily_yield_litres) for c in milking)
                     qty = qty * (0.45 if session == 'morning' else 0.55)
                     qty += random.uniform(-1.5, 1.5)
                     MilkLog.objects.create(
