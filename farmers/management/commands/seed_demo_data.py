@@ -99,7 +99,7 @@ class Command(BaseCommand):
 
         # ── Milk logs (30 days) ───────────────────────────────────
         for d in range(30):
-            log_date = date.today() - timedelta(days=29 - d)
+            date = date.today() - timedelta(days=29 - d)
             for farmer in farmers:
                 cattle_list = cattle_map.get(farmer.id, [])
                 milking = [c for c in cattle_list if c.is_milking]
@@ -111,11 +111,11 @@ class Command(BaseCommand):
                     qty += random.uniform(-1.5, 1.5)
                     MilkLog.objects.create(
                         farmer=farmer,
-                        log_date=log_date,
+                        date=date,
                         session=session,
                         quantity_litres=Decimal(str(round(max(qty, 2), 1))),
-                        fat_percent=Decimal(str(round(random.uniform(4.2, 5.8), 1))),
-                        snf_percent=Decimal(str(round(random.uniform(8.2, 9.1), 1))),
+                        fat_percentage=Decimal(str(round(random.uniform(4.2, 5.8), 1))),
+                        snf_percentage=Decimal(str(round(random.uniform(8.2, 9.1), 1))),
                     )
 
         # ── VAP Batches ───────────────────────────────────────────
@@ -133,8 +133,8 @@ class Command(BaseCommand):
                 quantity_kg=Decimal(str(qty)),
                 production_date=prod_date,
                 expiry_date=exp_date,
-                milk_used_litres=Decimal(str(qty * 10)),
-                notes=f'Demo {ptype} batch — NABARD MABIF Madurai',
+                total_milk_used_litres=Decimal(str(qty * 10)),
+                
             )
             b.source_farmers.set(farmers[:3])
             batches.append(b)
