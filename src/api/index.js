@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE = 'http://localhost:8000/api'
+const BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
 const api = axios.create({ baseURL: BASE })
 
@@ -58,4 +58,21 @@ export const agriAPI = {
   ndviTrend: (id) => api.get(`/agri/ndvi-trend/${id}/`),
   refreshNDVI: () => api.post('/agri/refresh-ndvi/'),
   alerts: () => api.get('/agri/alerts/'),
+  // Grazing
+  grazingLands: () => api.get('/agri/grazing-lands/'),
+  createGrazingLand: (d) => api.post('/agri/grazing-lands/', d),
+  refreshPasture: () => api.post('/agri/refresh-pasture/'),
+  pastureHistory: (id) => api.get(`/agri/pasture-history/${id}/`),
+  cattleLiveMap: () => api.get('/agri/cattle-live-map/'),
+  grazingSessions: () => api.get('/agri/grazing-sessions/'),
+  createSession: (d) => api.post('/agri/grazing-sessions/', d),
+}
+
+export const marketAPI = {
+  listings: () => api.get('/market/listings/'),
+  createListing: (d) => api.post('/market/listings/', d),
+  orders: () => api.get('/market/orders/'),
+  createOrder: (d) => api.post('/market/orders/', d),
+  updateOrder: (id, d) => api.patch(`/market/orders/${id}/`, d),
+  publicListings: () => axios.get(`${BASE}/market/public/`),
 }
