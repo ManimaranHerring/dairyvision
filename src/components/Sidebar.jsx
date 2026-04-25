@@ -2,12 +2,15 @@ import { NavLink } from 'react-router-dom'
 import { useAuth } from './AuthContext.jsx'
 
 const LINKS = [
-  { to: '/',        icon: '▦',  label: 'Dashboard'   },
-  { to: '/milk',    icon: '🥛', label: 'Milk log'     },
-  { to: '/vap',     icon: '📦', label: 'VAP batches'  },
-  { to: '/farms',   icon: '🌾', label: 'Farm health'  },
-  { to: '/alerts',  icon: '⚠',  label: 'Crop alerts'  },
-  { to: '/farmers', icon: '👥', label: 'Farmers'      },
+  { to: '/',        icon: '▦',  label: 'Dashboard'      },
+  { to: '/milk',    icon: '🥛', label: 'Milk log'        },
+  { to: '/vap',     icon: '📦', label: 'VAP batches'     },
+  { to: '/farms',   icon: '🌾', label: 'Farm health'     },
+  { to: '/grazing', icon: '🌿', label: 'Grazing monitor' },
+  { to: '/cattle-map', icon: '🐄', label: 'Cattle map'   },
+  { to: '/market',  icon: '🏪', label: 'Market linkage'  },
+  { to: '/alerts',  icon: '⚠',  label: 'Crop alerts'    },
+  { to: '/farmers', icon: '👥', label: 'Farmers'         },
 ]
 
 export default function Sidebar() {
