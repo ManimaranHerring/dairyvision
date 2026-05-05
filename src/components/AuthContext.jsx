@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { authAPI } from '../api/index.js'
 
-const Ctx = createContext(null)
+const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
   const [farmer, setFarmer] = useState(null)
@@ -12,7 +12,10 @@ export function AuthProvider({ children }) {
     if (token) {
       authAPI.getMe()
         .then(r => setFarmer(r.data))
-        .catch(() => localStorage.clear())
+        .catch(() => {
+          localStorage.removeItem('access')
+          localStorage.removeItem('refresh')
+        })
         .finally(() => setLoading(false))
     } else {
       setLoading(false)
@@ -20,27 +23,36 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = async (phone, password) => {
-    const r = await authAPI.login(phone, password)
-    localStorage.setItem('access', r.data.access)
-    localStorage.setItem('refresh', r.data.refresh)
-    const me = await authAPI.getMe()
-    setFarmer(me.data)
-    return me.data
+    try {
+      const r = await authAPI.login(phone, password)
+      localStorage.setItem('access', r.data.access)
+      localStorage.setItem('refresh', r.data.refresh)
+      const me = await authAPI.getMe()
+      setFarmer(me.data)
+      if (me.data.cooperative_code) {
+      localStorage.setItem('cooperative_code', me.data.cooperative_code)
+    }
+      return null
+    } catch (ex) {
+      return ex.response?.data?.detail || 'Wrong phone or password. Use demo credentials below.'
+    }
   }
 
   const logout = () => {
-    localStorage.clear()
+    localStorage.removeItem('access')
+    localStorage.removeItem('refresh')
     setFarmer(null)
-    window.location.href = '/login'
   }
 
   const isManager = farmer?.role === 'manager' || farmer?.role === 'nabard'
 
   return (
-    <Ctx.Provider value={{ farmer, login, logout, loading, isManager }}>
+    <AuthContext.Provider value={{ farmer, loading, login, logout, isManager }}>
       {children}
-    </Ctx.Provider>
+    </AuthContext.Provider>
   )
 }
 
-export const useAuth = () => useContext(Ctx)
+export function useAuth() {
+  return useContext(AuthContext)
+}
