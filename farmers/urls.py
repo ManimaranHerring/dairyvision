@@ -1,16 +1,17 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import (RegisterView, MeView, FarmerViewSet,
-                    FarmViewSet, CattleViewSet, DashboardStatsView)
-
-router = DefaultRouter()
-router.register('list', FarmerViewSet, basename='farmer')
-router.register('farms', FarmViewSet, basename='farm')
-router.register('cattle', CattleViewSet, basename='cattle')
+from django.urls import path
+from .views import (
+    MeView, FarmerListView, DashboardStatsView,
+    FarmListCreateView, CattleListCreateView,
+    RegisterCooperativeView, RegisterFarmerView,
+)
 
 urlpatterns = [
-    path('register/', RegisterView.as_view()),
     path('me/', MeView.as_view()),
+    path('list/', FarmerListView.as_view()),
     path('dashboard-stats/', DashboardStatsView.as_view()),
-    path('', include(router.urls)),
+    path('farms/', FarmListCreateView.as_view()),
+    path('cattle/', CattleListCreateView.as_view()),
+    # Public registration
+    path('register-cooperative/', RegisterCooperativeView.as_view()),
+    path('join/<str:code>/', RegisterFarmerView.as_view()),
 ]
