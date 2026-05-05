@@ -42,6 +42,7 @@ export const farmersAPI = {
   farms: () => api.get('/farmers/farms/'),
   createFarm: (d) => api.post('/farmers/farms/', d),
   cattle: () => api.get('/farmers/cattle/'),
+  createCattle: (d) =>api.post('/farmers/cattle/',d),
 }
 
 export const dairyAPI = {
