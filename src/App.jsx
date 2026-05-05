@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom
 import { AuthProvider, useAuth } from './components/AuthContext.jsx'
 import Sidebar from './components/Sidebar.jsx'
 import Login from './pages/Login.jsx'
+import Register from './pages/Register.jsx'
+import JoinCooperative from './pages/JoinCooperative.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import MilkLog from './pages/MilkLog.jsx'
 import VAPBatches from './pages/VAPBatches.jsx'
@@ -40,7 +42,11 @@ export default function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
+          {/* Public routes */}
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/join/:code" element={<JoinCooperative />} />
+          {/* Protected routes */}
           <Route element={<Guard />}>
             <Route path="/" element={<><Header title="Dashboard" sub="Dairy and agri operations overview" /><Dashboard /></>} />
             <Route path="/milk" element={<><Header title="Milk log" sub="Daily milk collection" /><MilkLog /></>} />
