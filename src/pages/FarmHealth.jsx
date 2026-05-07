@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { agriAPI, farmersAPI } from '../api/index.js'
+import AddFarmWithMap from '../components/AddFarmWithMap.jsx'
 
 const HEALTH_COLOR = {
   excellent: '#1E8449', good: '#1D9E75',
@@ -273,7 +274,7 @@ export default function FarmHealth() {
       </div>
 
       {selected && sel && <TrendPanel farm={sel} onClose={() => setSelected(null)} />}
-      {addModal && <AddFarmModal onClose={() => setAddModal(false)} onSaved={load} />}
+      {addModal && <AddFarmWithMap onClose={() => setAddModal(false)} onSaved={load} />}
     </div>
   )
 }
