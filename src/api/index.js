@@ -59,6 +59,7 @@ export const agriAPI = {
   ndviTrend: (id) => api.get(`/agri/ndvi-trend/${id}/`),
   refreshNDVI: () => api.post('/agri/refresh-ndvi/'),
   alerts: () => api.get('/agri/alerts/'),
+  farmIntelligence: (id) => api.get(`/agri/farm-intelligence/${id}/`),
   // Grazing
   grazingLands: () => api.get('/agri/grazing-lands/'),
   createGrazingLand: (d) => api.post('/agri/grazing-lands/', d),
