@@ -13,6 +13,7 @@ import CattleMap from './pages/CattleMap.jsx'
 import MarketLinkage from './pages/MarketLinkage.jsx'
 import Alerts from './pages/Alerts.jsx'
 import Farmers from './pages/Farmers.jsx'
+import FarmIntelligence from './pages/FarmIntelligence.jsx'
 
 function Shell() {
   return (
@@ -57,6 +58,7 @@ export default function App() {
             <Route path="/market" element={<><Header title="Market linkage" sub="Connect to institutional buyers with traceability" /><MarketLinkage /></>} />
             <Route path="/alerts" element={<><Header title="Crop alerts" sub="Stress alerts from satellite data" /><Alerts /></>} />
             <Route path="/farmers" element={<><Header title="Farmers" sub="All registered farmers" /><Farmers /></>} />
+	    <Route path="/intelligence" element={<><Header title="Farm Intelligence" sub="Vegetation, soil nutrients, atmospheric carbon — Sentinel-2 + Sentinel-5P" /><FarmIntelligence /></>} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
