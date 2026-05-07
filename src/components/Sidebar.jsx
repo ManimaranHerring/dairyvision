@@ -6,6 +6,7 @@ const LINKS = [
   { to: '/milk',    icon: '🥛', label: 'Milk log'        },
   { to: '/vap',     icon: '📦', label: 'VAP batches'     },
   { to: '/farms',   icon: '🌾', label: 'Farm health'     },
+  { to: '/intelligence', icon: '🛰️', label: 'Farm intelligence' },
   { to: '/grazing', icon: '🌿', label: 'Grazing monitor' },
   { to: '/cattle-map', icon: '🐄', label: 'Cattle map'   },
   { to: '/market',  icon: '🏪', label: 'Market linkage'  },
